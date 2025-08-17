@@ -22,6 +22,21 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Cache Tailwind CSS build
+        uses: actions/cache@v4
+        with:
+          path: |
+            app/assets/builds
+            public/assets
+          key: ${{ runner.os }}-tailwind-${{ hashFiles('**/tailwind.config.*', 'app/assets/tailwind/**') }}
+          restore-keys: |
+            ${{ runner.os }}-tailwind-
+
   scan_js:
     runs-on: ubuntu-latest
 
