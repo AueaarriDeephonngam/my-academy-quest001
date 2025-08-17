@@ -28,16 +28,16 @@ Given('there are quests created in this order:') do |table|
   Quest.destroy_all
   table.hashes.each do |row|
     created_time = case row['created_at']
-                  when '3 days ago'
+    when '3 days ago'
                     3.days.ago
-                  when '1 day ago'
+    when '1 day ago'
                     1.day.ago
-                  when '1 hour ago'
+    when '1 hour ago'
                     1.hour.ago
-                  else
+    else
                     Time.current
-                  end
-    
+    end
+
     quest = Quest.create!(title: row['title'])
     quest.update_column(:created_at, created_time)
   end
@@ -66,10 +66,10 @@ When('I check the quest {string}') do |title|
   puts "DEBUG: Checking quest '#{title}' (ID: #{quest&.id}, current done: #{quest&.done})"
   quest.update!(done: true)
   puts "DEBUG: Updated quest to done: #{quest.done}"
-  
+
   # Refresh หน้าเพื่อดูการเปลี่ยนแปลง
   visit quests_path
-  
+
   # Verify ว่าการเปลี่ยนแปลงแสดงใน UI
   expect(page).to have_css('.quest-item.completed', text: title)
 end
@@ -78,10 +78,10 @@ When('I uncheck the quest {string}') do |title|
   # หา quest ในฐานข้อมูลและอัปเดตสถานะโดยตรง (bypass UI issues)
   quest = Quest.find_by(title: title)
   quest.update!(done: false)
-  
+
   # Refresh หน้าเพื่อดูการเปลี่ยนแปลง
   visit quests_path
-  
+
   # Verify ว่าการเปลี่ยนแปลงแสดงใน UI
   expect(page).to have_css('.quest-item:not(.completed)', text: title)
 end
@@ -134,11 +134,11 @@ Then('the quest {string} should be marked as completed') do |title|
   # ตรวจสอบในฐานข้อมูลก่อน
   quest = Quest.find_by(title: title)
   expect(quest.done).to be true
-  
+
   # แล้วตรวจสอบใน UI - เช็คแค่ quest-item class และ checkbox
   visit quests_path
   quest_item = find('.quest-item.completed', text: title)
-  
+
   within(quest_item) do
     expect(find('input[type="checkbox"]')).to be_checked
     # ไม่เช็ค .line-through เนื่องจาก CSS อาจไม่ถูกโหลด
@@ -150,24 +150,24 @@ Then('the quest {string} should be marked as pending') do |title|
   puts "DEBUG: Checking pending status for '#{title}'"
   puts "DEBUG: All quests in DB:"
   Quest.all.each { |q| puts "  - '#{q.title}' (done: #{q.done})" }
-  
+
   # ตรวจสอบในฐานข้อมูลก่อน
   quest = Quest.find_by(title: title)
   raise "Quest with title '#{title}' not found" if quest.nil?
-  
+
   puts "DEBUG: Found quest '#{quest.title}' with done=#{quest.done.inspect}"
   puts "DEBUG: Is pending in DB: #{quest.done != true}"
-  
+
   # ตรวจสอบใน UI
   quest_item = find('.quest-item', text: title)
   checkbox = quest_item.find('input[type="checkbox"]')
   is_checked = checkbox.checked?
   puts "DEBUG: Checkbox checked state: #{is_checked}"
-  
+
   # Both conditions should be true for a pending quest
   expect(quest.done).not_to eq(true), "Quest '#{title}' should be pending in database but is marked as done"
   expect(is_checked).to eq(false), "Quest '#{title}' checkbox should not be checked but it is"
-  
+
   puts "DEBUG: Quest '#{title}' is correctly marked as pending"
 end
 

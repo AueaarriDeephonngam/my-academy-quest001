@@ -8,14 +8,14 @@ SimpleCov.start 'rails' do
   add_filter '/db/'
   add_filter '/vendor/'
   add_filter '/bin/'
-  
+
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
   add_group 'Views', 'app/views'
   add_group 'Helpers', 'app/helpers'
   add_group 'Jobs', 'app/jobs'
   add_group 'Mailers', 'app/mailers'
-  
+
   # Coverage threshold
   minimum_coverage 85
   minimum_coverage_by_file 70
@@ -92,7 +92,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  
+
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
 end

@@ -1,5 +1,5 @@
 class QuestsController < ApplicationController
-  before_action :set_quest, only: [:destroy, :toggle]
+  before_action :set_quest, only: [ :destroy, :toggle ]
 
   def index
     @quests = Quest.order(created_at: :desc)
@@ -8,9 +8,9 @@ class QuestsController < ApplicationController
 
   def create
     @quest = Quest.new(quest_params)
-    
+
     if @quest.save
-      redirect_to quests_path, notice: 'Quest added successfully!'
+      redirect_to quests_path, notice: "Quest added successfully!"
     else
       @quests = Quest.order(created_at: :desc)
       render :index
@@ -24,7 +24,7 @@ class QuestsController < ApplicationController
 
   def destroy
     @quest.destroy
-    redirect_to quests_path, notice: 'Quest deleted successfully!'
+    redirect_to quests_path, notice: "Quest deleted successfully!"
   end
 
   private

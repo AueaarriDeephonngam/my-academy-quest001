@@ -86,7 +86,7 @@ RSpec.describe Quest, type: :model do
     it "persists to database correctly" do
       quest = create(:quest, title: "Test Quest", done: false)
       persisted_quest = Quest.find(quest.id)
-      
+
       expect(persisted_quest.title).to eq("Test Quest")
       expect(persisted_quest.done).to be_falsey
       expect(persisted_quest.created_at).to be_present
@@ -96,10 +96,10 @@ RSpec.describe Quest, type: :model do
     it "updates timestamps on save" do
       quest = create(:quest)
       original_updated_at = quest.updated_at
-      
+
       sleep(0.01) # Small delay to ensure timestamp difference
       quest.update(title: "Updated title")
-      
+
       expect(quest.updated_at).to be > original_updated_at
     end
   end
@@ -141,13 +141,13 @@ RSpec.describe Quest, type: :model do
 
     it "can toggle done status multiple times" do
       quest = create(:quest, done: false)
-      
+
       quest.update(done: true)
       expect(quest.done).to be_truthy
-      
+
       quest.update(done: false)
       expect(quest.done).to be_falsey
-      
+
       quest.update(done: true)
       expect(quest.done).to be_truthy
     end

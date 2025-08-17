@@ -29,7 +29,7 @@ RSpec.describe "Quests", type: :request do
         expect {
           post "/quests", params: { quest: { title: "New quest from request spec" } }
         }.to change(Quest, :count).by(1)
-        
+
         expect(response).to have_http_status(302)
         expect(response).to redirect_to("/quests")
       end
@@ -73,7 +73,7 @@ RSpec.describe "Quests", type: :request do
       expect {
         delete "/quests/#{quest.id}"
       }.to change(Quest, :count).by(-1)
-      
+
       expect(response).to have_http_status(302)
       expect(response).to redirect_to("/quests")
     end
@@ -84,24 +84,24 @@ RSpec.describe "Quests", type: :request do
     it "allows creating, toggling, and deleting quests" do
       # Start with no quests
       expect(Quest.count).to eq(0)
-      
+
       # Create a quest
       post "/quests", params: { quest: { title: "Learn RSpec testing" } }
       expect(Quest.count).to eq(1)
       quest = Quest.last
       expect(quest.title).to eq("Learn RSpec testing")
       expect(quest.done).to be_falsey
-      
+
       # Toggle quest to completed
       patch "/quests/#{quest.id}/toggle"
       quest.reload
       expect(quest.done).to be_truthy
-      
+
       # Toggle quest back to pending
       patch "/quests/#{quest.id}/toggle"
       quest.reload
       expect(quest.done).to be_falsey
-      
+
       # Delete the quest
       delete "/quests/#{quest.id}"
       expect(Quest.count).to eq(0)

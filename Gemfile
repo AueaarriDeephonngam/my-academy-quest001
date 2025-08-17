@@ -16,7 +16,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-gem 'tailwindcss-rails'
+gem "tailwindcss-rails"
 
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
@@ -51,12 +51,12 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  
+
   # RSpec for testing
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  
+
   # Test coverage
   gem "simplecov", require: false
   gem "simplecov-html", require: false
@@ -71,7 +71,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  
+
   # Cucumber for E2E testing
   gem "cucumber-rails", require: false
   gem "database_cleaner-active_record"

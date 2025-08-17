@@ -118,7 +118,7 @@ Then('I should see Font Awesome icons throughout the page') do
     '.fa-handshake',  # Client Success icon
     '.fa-award'       # Achievement icon
   ]
-  
+
   icon_classes.each do |icon_class|
     expect(page).to have_css("i#{icon_class}")
   end
@@ -128,12 +128,12 @@ Then('all sections should be properly formatted') do
   # Check that all main sections exist and are properly structured
   sections = [
     '.goals-section',
-    '.self-section', 
+    '.self-section',
     '.team-section',
     '.odt-section',
     '.client-section'
   ]
-  
+
   sections.each do |section|
     expect(page).to have_css(section)
     within(section) do
@@ -147,7 +147,7 @@ Then('the page should be mobile responsive') do
   # Check for responsive design elements (this is a basic check)
   # In a real scenario, you might want to resize the window and test mobile-specific behavior
   expect(page).to have_css('.brag-document')
-  
+
   # Check that viewport meta tag is present
   expect(page).to have_css('meta[name="viewport"]', visible: false)
 end

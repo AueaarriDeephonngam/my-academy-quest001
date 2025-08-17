@@ -13,7 +13,7 @@ RSpec.describe QuestsController, type: :controller do
 
     it "assigns @quests in descending order by created_at" do
       get :index
-      expect(assigns(:quests)).to eq([quest2, quest1, quest3])
+      expect(assigns(:quests)).to eq([ quest2, quest1, quest3 ])
     end
 
     it "assigns a new @quest" do
@@ -72,7 +72,7 @@ RSpec.describe QuestsController, type: :controller do
 
       it "assigns @quests for the view" do
         post :create, params: { quest: invalid_attributes }
-        expect(assigns(:quests)).to eq([existing_quest])
+        expect(assigns(:quests)).to eq([ existing_quest ])
       end
 
       it "assigns the quest with errors to @quest" do
@@ -166,14 +166,14 @@ RSpec.describe QuestsController, type: :controller do
       it "permits only title parameter" do
         # This is tested implicitly in the create action tests
         # but we can also test parameter filtering directly
-        post :create, params: { 
-          quest: { 
-            title: "Test title", 
+        post :create, params: {
+          quest: {
+            title: "Test title",
             done: true,  # This should be filtered out
             some_other_param: "hack attempt"  # This should be filtered out
-          } 
+          }
         }
-        
+
         created_quest = Quest.last
         expect(created_quest.title).to eq("Test title")
         expect(created_quest.done).to be_falsey  # Should be false by default, not true from params
@@ -200,7 +200,7 @@ RSpec.describe QuestsController, type: :controller do
         quest.reload
         expect(quest.done).to be_truthy
 
-        # Second toggle: true -> false  
+        # Second toggle: true -> false
         patch :toggle, params: { id: quest.id }
         quest.reload
         expect(quest.done).to be_falsey
