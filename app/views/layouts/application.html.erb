@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <title>My Academy Quest - Track Your Goals</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Track and manage your daily quests and goals with My Academy Quest">
     <meta name="theme-color" content="#667eea">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="My Academy Quest">
+    <meta name="format-detection" content="telephone=no">
     
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,11 +19,11 @@
     <%= javascript_importmap_tags %>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    # <link rel="icon" type="image/png" href="<%= asset_path('icon.png') %>">
-    # <link rel="apple-touch-icon" href="<%= asset_path('icon.png') %>">
+    <link rel="icon" type="image/png" href="<%= asset_path('icon.png') %>">
+    <link rel="apple-touch-icon" href="<%= asset_path('icon.png') %>">
   </head>
 
-  <body>
+  <body class="<%= content_for?(:body_class) ? content_for(:body_class) : '' %>">
     <%= yield %>
   </body>
 </html>
