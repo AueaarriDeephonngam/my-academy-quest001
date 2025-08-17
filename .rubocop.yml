@@ -25,10 +25,3 @@ Metrics/AbcSize:
   Exclude:
     - 'spec/**/*'
     - 'features/**/*'
-
-# Allow multiple expectations in RSpec
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/ExampleLength:
-  Enabled: false
